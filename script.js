@@ -15,10 +15,10 @@
 //  console.log(item);
 // }
 
-// const myIterable = { from: 1, to: 4 }; // will display 1 2 3 4
+const myIterable = { from: 1, to: 4 }; // will display 1 2 3 4
 // const myIterable = { from: 5, to: 4 }; // throw an error
-// const myIterable = { to: 5, from: 7 };
-const myIterable = { to: '5', from: 'asdf' };
+// const myIterable = { to: 5}; 
+// const myIterable = { to: '5', from: 'asdf' };
 
 if(!myIterable.to){
     throw Error('Object does not have \'to\' property');
@@ -62,3 +62,19 @@ for(let i = myIterable.from;i<=myIterable.to;i++){
 //     Object.assign({}, { name, age }),
 //   ];
 // }
+
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+
+function getPerson(name, age){
+    return [
+        {name,age},
+        Object.create({},{name:{enumerable:true,configurable:false,value:name},age:{enumerable:true,configurable:false,value:age}}),
+        Object.assign({},{name},{age}),
+        new Person(name,age),
+    ]
+}
+
+console.log(getPerson('Joe', 50));
